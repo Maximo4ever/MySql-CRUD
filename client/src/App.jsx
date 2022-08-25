@@ -7,15 +7,19 @@ import TasksPage from "./pages/TasksPage";
 
 function App() {
   return (
-    <TaskContextProvider>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<TasksPage />} />
-        <Route path="/new" element={<TaskForm />} />
-        <Route path="/edit/:id" element={<TaskForm />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </TaskContextProvider>
+    <main className="bg-zinc-900 h-screen">
+      <TaskContextProvider>
+        <Navbar />
+        <div className="container mx-auto py-4">
+          <Routes>
+            <Route path="/" element={<TasksPage />} />
+            <Route path="/new" element={<TaskForm />} />
+            <Route path="/edit/:id" element={<TaskForm />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </div>
+      </TaskContextProvider>
+    </main>
   );
 }
 

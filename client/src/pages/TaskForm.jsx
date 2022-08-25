@@ -27,8 +27,7 @@ function TaskForm() {
   }, []);
 
   return (
-    <div>
-      <h1>{params.id ? "Edit Task" : "New Task"}</h1>
+    <div className="m-6">
       <Formik
         initialValues={task}
         enableReinitialize={true}
@@ -36,10 +35,10 @@ function TaskForm() {
           console.log(values);
           if (params.id) {
             await updateTask(params.id, values);
-            navigate("/");
           } else {
             await createTask(values);
           }
+          navigate("/");
           setTask({
             title: "",
             description: "",
@@ -47,24 +46,36 @@ function TaskForm() {
         }}
       >
         {({ handleChange, handleSubmit, values, isSubmitting }) => (
-          <Form onSubmit={handleSubmit}>
-            <label htmlFor="">Title</label>
+          <Form
+            onSubmit={handleSubmit}
+            className="bg-slate-300 p-4 max-w-sm rounded-md mx-auto"
+          >
+            <h1 className="text-xl text-center">
+              {params.id ? "Edit Task" : "New Task"}
+            </h1>
+            <label className="block mt-2">Title</label>
             <input
+              className="px-2 py-2 rounded-sm w-full"
               type="text"
               name="title"
               placeholder="Write a title"
               onChange={handleChange}
               value={values.title}
             />
-            <label htmlFor="">Description</label>
+            <label className="block mt-2">Description</label>
             <textarea
+              className="px-2 py-2 rounded-sm w-full "
               name="description"
-              rows="10"
+              rows="7"
               placeholder="Write a description"
               onChange={handleChange}
               value={values.description}
             ></textarea>
-            <button type="submit" disabled={isSubmitting}>
+            <button
+              className="block bg-indigo-500 px-3 py-1 mt-2 w-full"
+              type="submit"
+              disabled={isSubmitting}
+            >
               {isSubmitting ? "Saving..." : "Save"}
             </button>
           </Form>
